@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 14:36:08 by awerebea          #+#    #+#             */
-/*   Updated: 2020/05/07 16:07:45 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/05/20 15:43:32 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,19 @@
 char	*ft_strdup(const char *s)
 {
 	char	*dest;
-	char	*dest_ptr;
+	size_t	len;
+	size_t	start;
 
-	if (!(dest = malloc(sizeof(char) * (ft_strlen(s) + 1))))
+	start = (size_t)s;
+	while (*s)
+		s++;
+	len = (size_t)s - start;
+	s -= len;
+	if (!(dest = malloc(sizeof(char) * (len + 1))))
 		return (NULL);
-	dest_ptr = dest;
 	while (*s)
 		*dest++ = (char)*s++;
 	*dest = '\0';
-	return (dest_ptr);
+	dest -= len;
+	return (dest);
 }

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 12:01:43 by awerebea          #+#    #+#             */
-/*   Updated: 2020/05/09 15:17:00 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/05/20 16:26:37 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,15 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	char			*result;
 	unsigned int	len_str;
 	unsigned int	i;
+	size_t			start;
 
 	if (!s || !f)
 		return (NULL);
-	len_str = ft_strlen(s);
+	start = (size_t)s;
+	while (*s)
+		s++;
+	len_str = (unsigned int)((size_t)s - start);
+	s -= len_str;
 	if (!(result = malloc(sizeof(char) * len_str + 1)))
 		return (NULL);
 	i = -1;
