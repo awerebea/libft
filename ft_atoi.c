@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/30 19:32:35 by awerebea          #+#    #+#             */
-/*   Updated: 2020/05/09 11:53:00 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/05/21 14:56:01 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	ft_atoi(char *str)
 
 	sign = 1;
 	result = 0;
-	while (*(str) == '\n' || *(str) == '\t' || *(str) == '\v' ||
-		*(str) == '\r' || *(str) == '\f' || *(str) == ' ')
+	while (*str == '\n' || *str == '\t' || *str == '\v' || *str == '\r' ||
+			*str == '\f' || *str == ' ')
 		str++;
 	if (*str == '-')
 		sign = -1;

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 15:34:49 by awerebea          #+#    #+#             */
-/*   Updated: 2020/05/09 15:10:24 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/05/22 18:45:08 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,17 @@
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*substr;
-	char	*substr_ptr;
 	size_t	count;
 
 	if (!s)
 		return (NULL);
 	if (len)
 	{
-		count = ft_strlen(s);
+		count = (size_t)s;
+		while (*s)
+			s++;
+		count = (size_t)s - count;
+		s -= count;
 		if (len > (count - start) && count > start)
 			len = count - start;
 		else if (start >= count)
@@ -35,9 +38,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	if (!(substr = malloc(sizeof(char) * (len + 1))))
 		return (NULL);
-	substr_ptr = substr;
-	while (*s && len--)
+	count = len;
+	while (*s && count--)
 		*substr++ = s[start++];
 	*substr = '\0';
-	return (substr_ptr);
+	return (substr - len);
 }

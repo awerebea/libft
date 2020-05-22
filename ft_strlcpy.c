@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/01 12:18:33 by awerebea          #+#    #+#             */
-/*   Updated: 2020/05/05 23:38:36 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/05/21 15:16:07 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,15 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	size_t		count;
 	size_t		i;
 
-	if (NULL == src || NULL == dst)
+	if (!src || !dst)
 		return (0);
-	count = ft_strlen(src);
+	count = (size_t)src;
+	while (*src)
+		src++;
+	count = (size_t)src - count;
+	src -= count;
 	i = count;
-	if (size > 0)
+	if (size)
 	{
 		while (size-- > 1 && i--)
 			*dst++ = *src++;
