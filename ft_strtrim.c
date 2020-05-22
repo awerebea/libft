@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 19:24:54 by awerebea          #+#    #+#             */
-/*   Updated: 2020/05/10 20:25:40 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/05/22 21:16:01 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (NULL);
 	while (*s1 && ft_strchr(set, *s1))
 		s1++;
-	len = ft_strlen(s1);
+	len = (size_t)s1;
+	while (*s1)
+		s1++;
+	len = (size_t)s1 - len;
+	s1 -= len;
 	while (len && ft_strchr(set, s1[len - 1]))
 		len--;
 	if (!(result = ft_substr((char *)s1, 0, len)))
