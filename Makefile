@@ -6,50 +6,107 @@
 #    By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/30 21:56:47 by awerebea          #+#    #+#              #
-#    Updated: 2020/05/07 16:55:58 by awerebea         ###   ########.fr        #
+#    Updated: 2020/06/03 13:33:13 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME      = libft.a
-CC        = gcc
-CFLAGS    = -Wall -Wextra -Werror
-HEADER    = libft.h
-SRCDIR    = .
-OBJDIR    = ./obj
-OBJ       = $(addprefix $(OBJDIR)/, $(SRC:%.c=%.o))
-OBJ_BONUS = $(addprefix $(OBJDIR)/, $(SRC_BONUS:%.c=%.o))
-SRC       = $(addprefix $(SRCDIR)/, ft_atoi.c ft_bzero.c ft_calloc.c \
-			ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
-			ft_memccpy.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c \
-			ft_memset.c ft_strchr.c ft_strdup.c ft_strlcat.c ft_strlcpy.c \
-			ft_strlen.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_tolower.c \
-			ft_toupper.c ft_itoa.c ft_putchar_fd.c ft_putendl_fd.c \
-			ft_putnbr_fd.c ft_putstr_fd.c ft_split.c ft_strjoin.c ft_strmapi.c \
-			ft_strtrim.c ft_substr.c)
-SRC_BONUS = $(addprefix $(SRCDIR)/, ft_lstadd_back.c ft_lstadd_front.c \
-			ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstlast.c ft_lstmap.c \
-			ft_lstnew.c ft_lstsize.c)
+NAME     = libft.a
+CC       = gcc
+CFLAGS   = -Wall -Wextra -Werror
+OFLAGS   = -O2
+DBGFLAGS = -g
+INCLUDES = -I includes/
+SRCDIR   = src/
+OBJDIR   = obj/
 
-.PHONY: all clean fclean bonus
+FLSDIR_1 = put/
+FLS_1    = $(addprefix $(FLSDIR_1), \
+			ft_putchar_fd \
+			ft_putendl_fd \
+			ft_putnbr_fd \
+			ft_putstr_fd)
+FLSDIR_2 = strings/
+FLS_2    = $(addprefix $(FLSDIR_2), \
+			ft_strchr \
+			ft_strdup \
+			ft_strlcat \
+			ft_strlcpy \
+			ft_strlen \
+			ft_strncmp \
+			ft_strnstr \
+			ft_strrchr \
+			ft_split \
+			ft_strjoin \
+			ft_strmapi \
+			ft_strtrim \
+			ft_substr)
+FLSDIR_3 = memory/
+FLS_3    = $(addprefix $(FLSDIR_3), \
+			ft_bzero \
+			ft_calloc \
+			ft_memccpy \
+			ft_memchr \
+			ft_memcmp \
+			ft_memcpy \
+			ft_memmove \
+			ft_memset)
+FLSDIR_4 = symbols/
+FLS_4    = $(addprefix $(FLSDIR_4), \
+			ft_isalnum \
+			ft_isalpha \
+			ft_isascii \
+			ft_isdigit \
+			ft_isprint \
+			ft_tolower \
+			ft_toupper)
+FLSDIR_5 = numbers/
+FLS_5    = $(addprefix $(FLSDIR_5), \
+			ft_atoi \
+			ft_itoa)
+FLSDIR_6 = lists/
+FLS_6    = $(addprefix $(FLSDIR_6), \
+			ft_lstadd_back \
+			ft_lstadd_front \
+			ft_lstclear \
+			ft_lstdelone \
+			ft_lstiter \
+			ft_lstlast \
+			ft_lstmap \
+			ft_lstnew \
+			ft_lstsize)
+SRC      = $(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4) \
+			$(FLS_5) $(FLS_6)
 
-all: $(NAME)
+OBJ      = $(addprefix $(OBJDIR), $(SRC:=.o))
+DFLS     = $(SRC:=.d)
 
-$(NAME):   $(OBJ) $(HEADER)
-	ar rcs $(NAME) $(OBJ)
-	ranlib $(NAME)
+override FLAGS ?= $(CFLAGS)
 
-bonus:     $(OBJ) $(OBJ_BONUS) $(HEADER)
-	ar rcs $(NAME) $(OBJ) $(OBJ_BONUS)
-	ranlib $(NAME)
+all:			$(OBJDIR) $(NAME)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@mkdir -p  $(OBJDIR)
-	$(CC)  -c  $(CFLAGS) $^ -o $@
+$(NAME):		$(OBJ)
+	ar rc		$(NAME) $?
+	ranlib		$(NAME)
+
+$(OBJ):			$(OBJDIR)%.o: $(SRCDIR)%.c
+	$(CC)		$(FLAGS) $(INCLUDES) -c $< -o $@ -MD
+
+$(OBJDIR):
+	mkdir -p	$(OBJDIR)
+	mkdir -p	$(addprefix $(OBJDIR), $(FLSDIR_1) $(FLSDIR_2) $(FLSDIR_3) \
+				$(FLSDIR_4) $(FLSDIR_5) $(FLSDIR_6))
+
+debug:
+	make FLAGS="$(CFLAGS) $(DBGFLAGS)" all
+
+include $(wildcard $(addprefix $(OBJDIR), $(DFLS)))
 
 clean:
-	rm -rf $(OBJDIR)
+	rm -rf		$(OBJDIR)
 
-fclean: clean
-	rm -f $(NAME)
+fclean:			clean
+	rm -f		$(NAME)
 
-re: fclean all
+re:				fclean all
+
+.PHONY: all clean fclean re
