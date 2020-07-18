@@ -16,8 +16,8 @@ CFLAGS   = -Wall -Wextra -Werror
 OFLAGS   = -O2
 DBGFLAGS = -g
 INCLUDES = -I includes/
-SRCDIR   = src/
-OBJDIR   = obj/
+SRCDIR   = srcs/
+OBJDIR   = objs/
 
 FLSDIR_1 = put/
 FLS_1    = $(addprefix $(FLSDIR_1), \
@@ -109,4 +109,4 @@ fclean:			clean
 
 re:				fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all debug clean fclean re
