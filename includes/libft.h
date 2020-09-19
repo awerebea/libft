@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/30 22:00:13 by awerebea          #+#    #+#             */
-/*   Updated: 2020/06/02 23:38:55 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 14:25:49 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef	struct	s_list
 
 char			*ft_strchr(const char *s, int c);
 char			*ft_strdup(const char *s);
+char			*ft_strncpy(char *dest, char *src, unsigned int n);
 char			*ft_strnstr(const char *big, const char *little, size_t len);
 char			*ft_strrchr(const char *s, int c);
 int				ft_atoi(char *str);
@@ -31,6 +32,7 @@ int				ft_isalnum(int c);
 int				ft_isalpha(int c);
 int				ft_isascii(int c);
 int				ft_isdigit(int c);
+int				ft_isspace(int c);
 int				ft_isprint(int c);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
