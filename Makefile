@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/30 21:56:47 by awerebea          #+#    #+#              #
-#    Updated: 2020/06/03 13:33:13 by awerebea         ###   ########.fr        #
+#    Updated: 2020/09/23 22:03:56 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,17 +27,18 @@ FLS_1    = $(addprefix $(FLSDIR_1), \
 			ft_putstr_fd)
 FLSDIR_2 = strings/
 FLS_2    = $(addprefix $(FLSDIR_2), \
+			ft_split \
 			ft_strchr \
 			ft_strdup \
+			ft_strjoin \
 			ft_strlcat \
 			ft_strlcpy \
 			ft_strlen \
+			ft_strmapi \
 			ft_strncmp \
+			ft_strncpy \
 			ft_strnstr \
 			ft_strrchr \
-			ft_split \
-			ft_strjoin \
-			ft_strmapi \
 			ft_strtrim \
 			ft_substr)
 FLSDIR_3 = memory/
@@ -57,6 +58,7 @@ FLS_4    = $(addprefix $(FLSDIR_4), \
 			ft_isascii \
 			ft_isdigit \
 			ft_isprint \
+			ft_isspace \
 			ft_tolower \
 			ft_toupper)
 FLSDIR_5 = numbers/
